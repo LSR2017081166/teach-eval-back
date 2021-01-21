@@ -1,12 +1,12 @@
 // 引用express框架
 const express = require('express')
 // 创建登录路由
-const login = express.Router()
+const user = express.Router()
 // 引入路由账号模型
-const { Login } = require('../../model/login')
+const { Login } = require('../model/user/login')
 
 // 实现登录功能的路由
-login.post('/login', async (req, res) => {
+user.post('/login', async (req, res) => {
     const { account, password } = req.body
     console.log(req.body);
     let loginRes = await Login.findOne({ account })
@@ -40,4 +40,4 @@ login.post('/login', async (req, res) => {
     }
 })
 
-module.exports = login
+module.exports = user

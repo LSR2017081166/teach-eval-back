@@ -23,14 +23,14 @@ const adminSchema = new mongoose.Schema({
 // 创建集合
 const Administrator = mongoose.model('Administrators', adminSchema,'Administrators')
 
-Administrator.create({
-    jobNum:100001,
-    password:333333
-}).then(()=>{
-    console.log("管理员信息创建成功！");
-}).catch(()=>{
-    console.log("管理员信息创建失败！");
-})
+// Administrator.create({
+//     jobNum:100001,
+//     password:333333
+// }).then(()=>{
+//     console.log("管理员信息创建成功！");
+// }).catch(()=>{
+//     console.log("管理员信息创建失败！");
+// })
 // 将用户集合作为模块成员导出
 module.exports = {
     Administrator

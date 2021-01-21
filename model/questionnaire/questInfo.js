@@ -19,6 +19,12 @@ const questSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    // 可编辑分数(必须为0才能发布)
+    score: {
+        type: Number,
+        required: true,
+        default:100
+    },
     // 是否发布(0为未发布,1为已发布)
     publish:{
         type: String,
@@ -28,9 +34,9 @@ const questSchema = new mongoose.Schema({
 })
 
 // 创建集合
-const Questionnaire = mongoose.model('Questionnaires', questSchema,'Questionnaires')
+const QuestInfo = mongoose.model('QuestInfos', questSchema,'QuestInfos')
 
-// Questionnaire.create({
+// QuestInfo.create({
 //     name:'111',
 //     section:'1/2-1/4'
 // }).then(()=>{
@@ -38,7 +44,5 @@ const Questionnaire = mongoose.model('Questionnaires', questSchema,'Questionnair
 // }).catch(()=>{
 //     console.log("问卷信息创建失败！");
 // })
-// 将问卷集合作为模块成员导出
-module.exports = {
-    Questionnaire
-}
+// 将问卷信息集合作为模块成员导出
+module.exports = QuestInfo

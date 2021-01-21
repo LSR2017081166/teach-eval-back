@@ -20,8 +20,8 @@ app.all('*',function (req, res, next) {
 　next();　
 });
 // 引入路由模块
-const login=require('./route/user/login')
-// const quest=require('./route/quest')
+const user=require('./route/user')
+const questionnaire=require('./route/questionnaire')
 // 数据库连接
 require('./model/connect')
 
@@ -31,7 +31,7 @@ require('./model/connect')
 // require('./model/administrator')
 // require('./model/questionnaire')
 // require('./model/question')
-// require('./model/login')
+require('./model/questionnaire/jQuiz')
 // 处理post请求参数
 // 解析表单
 // app.use(bodyParser.urlencoded({extended: false}));
@@ -41,8 +41,8 @@ app.use(bodyParser.json())
 
 
 // 为路由匹配请求路径
-app.use('/user',login)
-// app.use('/quest',quest)
+app.use('/user',user)
+app.use('/quest',questionnaire)
 
 // 监听端口
 app.listen(3000)
