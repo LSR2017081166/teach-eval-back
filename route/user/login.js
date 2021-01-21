@@ -1,18 +1,20 @@
 // 引用express框架
 const express = require('express')
 // 创建登录路由
-const user = express.Router()
-// 引入用户模型
-const { User } = require('../model/user')
+const login = express.Router()
+// 引入路由账号模型
+const { Login } = require('../../model/login')
 
 // 实现登录功能的路由
-user.post('/login', async (req, res) => {
+login.post('/login', async (req, res) => {
     const { account, password } = req.body
-    let user = await User.findOne({ account })
+    console.log(req.body);
+    let loginRes = await Login.findOne({ account })
     // 如果查询到了该账户
-    if (user) {
+    if (loginRes) {
+        console.log("找到了");
         // 比对密码
-        if (password == user.password) {
+        if (password == loginRes.password) {
             // 比对成功
             let data =
             {
@@ -21,8 +23,8 @@ user.post('/login', async (req, res) => {
                 "message": "登录成功",
                 "url": "/user/login",
                 "data": {
-                    "account": user.account,
-                    "password": user.password
+                    "account": loginRes.account,
+                    "password": loginRes.password
                 }
             }
             res.send(data)
@@ -38,4 +40,4 @@ user.post('/login', async (req, res) => {
     }
 })
 
-module.exports = user
+module.exports = login
