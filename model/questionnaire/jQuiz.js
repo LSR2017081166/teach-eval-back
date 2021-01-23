@@ -29,15 +29,15 @@ const jQuizSchema = new mongoose.Schema({
 // 创建集合
 const JQuiz = mongoose.model('JQuizs', jQuizSchema, 'JQuizs')
 
-JQuiz.create({
-    questName: '111',
-    questionKey: '2',
-    title:'您对我校现行的学生评教工作(学生评教实施过程)',
-    textArea:'没意见'
-}).then(() => {
-    console.log("简答题创建成功！");
-}).catch(() => {
-    console.log("简答题创建失败！");
-})
+// JQuiz.create({
+//     questName: '111',
+//     questionKey: '2',
+//     title:'您对我校现行的学生评教工作(学生评教实施过程)',
+//     textArea:'没意见'
+// }).then(() => {
+//     console.log("简答题创建成功！");
+// }).catch(() => {
+//     console.log("简答题创建失败！");
+// })
 // 将简答题集合作为模块成员导出
 module.exports = JQuiz

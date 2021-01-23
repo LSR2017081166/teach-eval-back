@@ -31,7 +31,7 @@ require('./model/connect')
 // require('./model/administrator')
 // require('./model/questionnaire')
 // require('./model/question')
-require('./model/questionnaire/jQuiz')
+// require('./model/questionnaire/jQuiz')
 // 处理post请求参数
 // 解析表单
 // app.use(bodyParser.urlencoded({extended: false}));
