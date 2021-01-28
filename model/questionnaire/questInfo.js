@@ -20,11 +20,11 @@ const questSchema = new mongoose.Schema({
         trim: true
     },
     // 可编辑分数(必须为0才能发布)
-    score: {
-        type: Number,
-        required: true,
-        default:100
-    },
+    // score: {
+    //     type: Number,
+    //     required: true,
+    //     default:100
+    // },
     // 是否发布(0为未发布,1为已发布)
     publish:{
         type: String,

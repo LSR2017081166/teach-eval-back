@@ -34,12 +34,12 @@ questionnaire.post('/createQuest', async (req, res) => {
         }
         res.send(data)
     })
-    // 问卷题目集信息存入数据库
+    // 问卷选择题存入数据库
     for (var value of subjects) {
-        let { subKey, title, optionA, optionB, optionC, optionD, scoreA, scoreB, scoreC, scoreD } = value
+        let { title, optionA, optionB, optionC, optionD, scoreA, scoreB, scoreC, scoreD } = value
         Question.create({
             questName: name,
-            questionKey: subKey,
+            // subKey: 0,
             title,
             optionA,
             optionB,
@@ -52,11 +52,18 @@ questionnaire.post('/createQuest', async (req, res) => {
         })
     }
     // 问卷简答题信息存入数据库
-    JQuiz.create({
-        questName: name,
-        title: jQuizs[0].title,
-        questionKey: jQuizs[0].questionKey
-    })
+    for (var value of jQuizs) {
+        let { title} = value
+        JQuiz.create({
+            questName: name,
+            title
+        })
+    }
+    // JQuiz.create({
+    //     questName: name,
+    //     title: jQuizs[0].title,
+    //     // questionKey: jQuizs[0].questionKey
+    // })
 
 })
 
@@ -71,17 +78,55 @@ questionnaire.get('/getQuestInfo', async (req, res) => {
     })
 })
 
-// 实现获取指定名称问卷所有题目路由
+// 实现获取指定名称问卷所有选择题路由
 questionnaire.post('/getQuestions', async (req, res) => {
-    const {name}=req.body
-    console.log(name);
-    Question.find({questName:name}, function (err, doc) {
+    const { name } = req.body
+    Question.find({ questName: name }, function (err, doc) {
         if (err) {
             console.log(err);
             return;
         }
-        console.log(doc);
         res.send(doc)
     })
+})
+// 实现获取指定名称问卷所有简答题路由
+questionnaire.post('/getJQuizs', async (req, res) => {
+    const { name } = req.body
+    JQuiz.find({ questName: name }, function (err, doc) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(doc)
+    })
+})
+// 删除指定问卷所有题目
+questionnaire.post('/delAllQuests', async (req, res) => {
+    const { name } = req.body
+    // 删问卷信息
+    QuestInfo.deleteMany({ name }, function (err, doc) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("问卷信息删除成功111！");
+    })
+    // 删简答题
+    JQuiz.deleteMany({ questName:name }, function (err, doc) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("简答题删除成功111！");
+    })
+    // // 删选择题
+    Question.deleteMany({ questName:name }, function (err, doc) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("选择题删除成功111！");
+    })
+    res.send('ok')
 })
 module.exports = questionnaire
