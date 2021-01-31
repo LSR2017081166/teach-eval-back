@@ -13,7 +13,7 @@ const jQuizSchema = new mongoose.Schema({
         trim: true
     },
     // 处于问卷第几题
-    // questionKey: {
+    // jQuizKey: {
     //     type: String,
     //     required: true
     // },

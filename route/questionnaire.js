@@ -77,7 +77,16 @@ questionnaire.get('/getQuestInfo', async (req, res) => {
         res.send(doc)
     })
 })
-
+// 实现获取所有已发布问卷说明信息路由
+questionnaire.get('/getPubInfo', async (req, res) => {
+    QuestInfo.find({publish:'1'}, function (err, doc) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(doc)
+    })
+})
 // 实现获取指定名称问卷所有选择题路由
 questionnaire.post('/getQuestions', async (req, res) => {
     const { name } = req.body
@@ -129,4 +138,17 @@ questionnaire.post('/delAllQuests', async (req, res) => {
     })
     res.send('ok')
 })
+// 发布问卷
+questionnaire.post('/pubQuest', async (req, res) => {
+    let {name}=req.body
+    QuestInfo.update({name},{publish:'1'},function(err,doc){
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send('ok')
+        console.log('ok');
+    })
+})
+
 module.exports = questionnaire

@@ -76,6 +76,4 @@ const Teacher = mongoose.model('Teachers', teaSchema, 'Teachers')
 //     console.log("教师信息创建失败！");
 // })
 // 将用户集合作为模块成员导出
-module.exports = {
-    Teacher
-}
+module.exports = Teacher

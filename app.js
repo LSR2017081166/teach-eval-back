@@ -22,16 +22,17 @@ app.all('*',function (req, res, next) {
 // 引入路由模块
 const user=require('./route/user')
 const questionnaire=require('./route/questionnaire')
+const course=require('./route/course')
 // 数据库连接
 require('./model/connect')
 
 // 加入模拟数据
-// require('./model/student')
+require('./model/user/student')
 // require('./model/teacher')
 // require('./model/administrator')
-// require('./model/questionnaire')
+require('./model/questionnaire/questRes')
 // require('./model/question')
-// require('./model/questionnaire/jQuiz')
+// require('./model/course/course')
 // 处理post请求参数
 // 解析表单
 // app.use(bodyParser.urlencoded({extended: false}));
@@ -43,6 +44,7 @@ app.use(bodyParser.json())
 // 为路由匹配请求路径
 app.use('/user',user)
 app.use('/quest',questionnaire)
+app.use('/course',course)
 
 // 监听端口
 app.listen(3000)

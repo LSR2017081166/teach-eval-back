@@ -31,6 +31,4 @@ const Login = mongoose.model('Logins', loginSchema,'Logins')
 //     console.log("登录账号创建失败！");
 // })
 // 将用户集合作为模块成员导出
-module.exports = {
-    Login
-}
+module.exports =  Login
