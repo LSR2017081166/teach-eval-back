@@ -23,16 +23,16 @@ app.all('*',function (req, res, next) {
 const user=require('./route/user')
 const questionnaire=require('./route/questionnaire')
 const course=require('./route/course')
+const result=require('./route/result')
 // 数据库连接
 require('./model/connect')
 
 // 加入模拟数据
-require('./model/user/student')
+// require('./model/user/student')
 // require('./model/teacher')
 // require('./model/administrator')
-require('./model/questionnaire/questRes')
+// require('./model/result/jQuizRes')
 // require('./model/question')
-// require('./model/course/course')
 // 处理post请求参数
 // 解析表单
 // app.use(bodyParser.urlencoded({extended: false}));
@@ -45,6 +45,7 @@ app.use(bodyParser.json())
 app.use('/user',user)
 app.use('/quest',questionnaire)
 app.use('/course',course)
+app.use('/result',result)
 
 // 监听端口
 app.listen(3000)

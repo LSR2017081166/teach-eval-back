@@ -3,8 +3,9 @@ const express = require('express')
 // 创建登录路由
 const user = express.Router()
 // 引入路由账号模型
-const Login  = require('../model/user/login')
-const Student  = require('../model/user/student')
+const Login = require('../model/user/login')
+const Student = require('../model/user/student')
+const Teacher = require('../model/user/teacher')
 
 // 实现登录功能的路由
 user.post('/login', async (req, res) => {
@@ -29,13 +30,36 @@ user.post('/login', async (req, res) => {
 })
 // 通过账号查找学生身份的路由
 user.post('/getIdInfo', async (req, res) => {
-    let {account}=req.body
-    Student.find({sno:account}, function (err, doc) {
+    let { account } = req.body
+    Student.find({ sno: account }, function (err, doc) {
         if (err) {
             console.log(err);
             return;
         }
         res.send(doc)
+    })
+})
+// 得到所有教师信息，并依据学院将教师分组返给前端
+user.post('/getAllTeachers', async (req, res) => {
+    Teacher.aggregate([
+        {
+            $group:
+            {
+                _id: {academy:"$academy"},//{}内的是分组条件
+                details: {
+                    $push: {
+                        name: '$name'
+                    }
+                }
+            },
+        }
+    ], function (err, doc) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.send(doc)
+        // console.log(JSON.stringify(doc));
     })
 })
 module.exports = user

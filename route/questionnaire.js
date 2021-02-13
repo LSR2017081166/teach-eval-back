@@ -11,6 +11,8 @@ const JQuiz = require('../model/questionnaire/jQuiz')
 // 实现存入问卷说明信息、题目集、简答题的路由
 questionnaire.post('/createQuest', async (req, res) => {
     const { name, section, score, publish, subjects, jQuizs } = req.body
+    console.log('111111111111');
+    console.log(subjects);
     // 问卷说明信息存入数据库
     QuestInfo.create({
         name,
@@ -96,6 +98,8 @@ questionnaire.post('/getQuestions', async (req, res) => {
             return;
         }
         res.send(doc)
+        console.log('22222222222');
+        console.log(doc);
     })
 })
 // 实现获取指定名称问卷所有简答题路由
