@@ -19,12 +19,12 @@ const questSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    // 可编辑分数(必须为0才能发布)
-    // score: {
-    //     type: Number,
-    //     required: true,
-    //     default:100
-    // },
+    // 问卷类型(为‘1’是学生问卷，‘2’是教师问卷)
+    questType: {
+        type: String,
+        required: true,
+        default:'1'
+    },
     // 是否发布(0为未发布,1为已发布)
     publish:{
         type: String,

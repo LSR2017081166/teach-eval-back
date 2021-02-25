@@ -10,7 +10,7 @@ const JQuiz = require('../model/questionnaire/jQuiz')
 
 // 实现存入问卷说明信息、题目集、简答题的路由
 questionnaire.post('/createQuest', async (req, res) => {
-    const { name, section, score, publish, subjects, jQuizs } = req.body
+    const { name, section, score, publish, subjects, jQuizs,questType } = req.body
     console.log('111111111111');
     console.log(subjects);
     // 问卷说明信息存入数据库
@@ -18,7 +18,8 @@ questionnaire.post('/createQuest', async (req, res) => {
         name,
         section,
         score,
-        publish
+        publish,
+        questType
     }).then(() => {
         let data =
         {
@@ -98,8 +99,6 @@ questionnaire.post('/getQuestions', async (req, res) => {
             return;
         }
         res.send(doc)
-        console.log('22222222222');
-        console.log(doc);
     })
 })
 // 实现获取指定名称问卷所有简答题路由
@@ -145,7 +144,7 @@ questionnaire.post('/delAllQuests', async (req, res) => {
 // 发布问卷
 questionnaire.post('/pubQuest', async (req, res) => {
     let {name}=req.body
-    QuestInfo.update({name},{publish:'1'},function(err,doc){
+    QuestInfo.updateOne({name},{publish:'1'},function(err,doc){
         if (err) {
             console.log(err);
             return;
