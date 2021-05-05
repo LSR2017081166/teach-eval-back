@@ -62,12 +62,6 @@ questionnaire.post('/createQuest', async (req, res) => {
             title
         })
     }
-    // JQuiz.create({
-    //     questName: name,
-    //     title: jQuizs[0].title,
-    //     // questionKey: jQuizs[0].questionKey
-    // })
-
 })
 
 // 实现获取所有（暂存，已发布）问卷说明信息路由
